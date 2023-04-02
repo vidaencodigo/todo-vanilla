@@ -41,7 +41,13 @@ function AddNoteToStack(collection, item) {
 
 };
 
-
+function totalTodo(status = true, collection){
+    let count = collection.map(item => item.isActive == status);
+    let total  = count.filter(function( element ) {
+        if(element) return element
+     }).length;
+     document.querySelector("#counter").innerHTML=total;
+}
 function findNote(id, collection) {
     // Busca una nota por @id y la retorna
     let resp = collection.find(nota => nota.id == id);
@@ -57,8 +63,8 @@ function closeNote(id, collection) {
         // busca nota y la almacena en variable
         temporal_note = findNote(id, collection);
         if (temporal_note) {
-            // si la nota existe se cierra
-            temporal_note.isActive = false;
+            // si la nota existe se cierra o se reactiva
+            (temporal_note.isActive) ? temporal_note.isActive = false : temporal_note.isActive = true;
             // buscamos el indice de la nota
             indice = collection.findIndex((nota) => nota.id === id);
             // se actualiza la nota al stack
@@ -82,6 +88,8 @@ function checker(id){
 
 
 function render(collection) {
+   totalTodo(true, todoList);
+  
    
     let data = collection
     const content = document.querySelector("#todos")
@@ -99,7 +107,7 @@ function render(collection) {
               </label>
           
             </div>
-            <div class="item--content">
+            <div class="item--content" onclick="checker(this)" id="${item.id}">
               <p class="${item.isActive ? '':'lineT'}">${item.body}</p>
               <a href="#" class="close--cross">
                 <img src="./images/icon-cross.svg" alt="close">

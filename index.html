@@ -173,7 +173,7 @@
       font-weight: 700;
     }
 
-   
+
 
     .todo--actions {
       padding: 15px 10px;
@@ -225,9 +225,9 @@
       /*fondo gradiente para checkbox*/
       background-color: #9b5fe5;
       background-image: linear-gradient(to right, #70c4fa, #9b5fe5);
-     
+
     }
-    
+
 
     .item {
 
@@ -255,12 +255,23 @@
       overflow: hidden;
     }
 
-    .item--content:hover .close--cross {
-      display: block;
-      transition: all .7;
+    .close--cross {
+      width: 30px;
+      height: 30px;
+    
+      display: flex;
+      align-items: center;
+      justify-content: center;
+     
     }
 
-    .close--cross {
+    .item--content:hover .close--cross>img {
+      display: block;
+      transition: all .7;
+
+    }
+
+    .close--cross>img {
       display: none;
     }
 
@@ -324,13 +335,13 @@
         <div class="todo--list">
           <span id="todos">
 
-            
+
 
 
           </span>
           <div class="todo--actions">
             <div>
-              0 items left
+              <span id="counter">0</span> items left
             </div>
             <div>
               <a class="actions" href="#">
@@ -346,17 +357,20 @@
   <script>
 
     document.addEventListener("DOMContentLoaded", () => {
+      let totalActivos = totalTodo(true, todoList);
+      console.log(totalActivos);
       const input = document.querySelector("#todo");
       input.addEventListener("change", () => {
-        let item  =  newTodoItem(todoList, itemTemplate, input.value);
+        let item = newTodoItem(todoList, itemTemplate, input.value);
         AddNoteToStack(todoList, item);
-        input.value="";
-       
+        input.value = "";
+
         render(todoList)
+
       })
     })
 
-    
+
     function changeTheme() {
       const content = document.querySelector(".app");
       content.classList.toggle("dark")
