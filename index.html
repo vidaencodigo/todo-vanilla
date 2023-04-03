@@ -85,7 +85,7 @@
 
     .title,
     .todo--content {
-      width: 35%;
+      width: 50%;
 
       align-self: center;
     }
@@ -166,22 +166,25 @@
       display: flex;
       flex-direction: column;
       padding: 0;
-      
+
       max-height: 300px;
-      
+
     }
 
     .filtro {
       display: flex;
       flex-wrap: wrap;
-      gap:8px;
+      gap: 8px;
     }
+
     .f-active {
-      color: blue!important;
+      color: #0d6efd !important;
     }
-    .filtro a:hover  {
-      color: blue;
+
+    .filtro a:hover {
+      color: #0d6efd;
     }
+
     #todos {
       overflow-x: auto;
       scroll-behavior: smooth;
@@ -299,7 +302,7 @@
     }
 
     /*dark*/
-    
+
     .dark .icon--theme {
       background: url("images/icon-sun.svg");
       background-repeat: no-repeat;
@@ -328,6 +331,49 @@
     .dark .todo--list {
       background-color: hsl(235, 24%, 19%);
       transition: all .7s;
+    }
+
+    .enlinea {
+      display: block;
+    }
+    .fueralinea{
+      display: none;
+    }
+
+    .dark .fueralinea {
+      background-color: hsl(235, 24%, 19%);
+      transition: all .7s;
+    }
+
+    
+
+    @media screen and (max-width: 600px) {
+      .fueralinea{
+        display: block;
+      }
+      .fueralinea {
+      
+      background-color: hsl(0, 0%, 98%);
+      padding: 15px 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+      body,
+      input {
+        font-size: 1.2rem;
+      }
+
+      .title,
+      .todo--content {
+        width: 100%;
+      }
+
+      .enlinea {
+        display: none;
+      }
     }
   </style>
 
@@ -367,7 +413,7 @@
             <div>
               <span id="counter">0</span> items left
             </div>
-            <div class="filtro">
+            <div class="filtro enlinea">
               <a class="actions primero filtros f-active" href="#" data-action="all-todo" onclick="setNav(this)">
                 All
               </a>
@@ -384,6 +430,19 @@
               </a>
             </div>
           </div>
+
+
+        </div>
+        <div class="fueralinea">
+          <a class="actions primero filtros f-active" href="#" data-action="all-todo" onclick="setNav(this)">
+            All
+          </a>
+          <a class="actions filtros" href="#" data-action="active-todo" onclick="setNav(this)">
+            Active
+          </a>
+          <a class="actions filtros" href="#" data-action="completed-todo" onclick="setNav(this)">
+            Completed
+          </a>
         </div>
       </div>
     </section>
@@ -404,29 +463,29 @@
 
       })
     })
-    function deleteCompleted(){
+    function deleteCompleted() {
       deleteAllComplpeted(todoList);
     }
-    function setNav(elemento){
+    function setNav(elemento) {
       let ele = elemento;
-      document.querySelectorAll('.filtros').forEach(ele=>{
-            ele.classList.remove("f-active");
-          })
+      document.querySelectorAll('.filtros').forEach(ele => {
+        ele.classList.remove("f-active");
+      })
       switch (ele.dataset.action) {
         case 'all-todo':
           ele.classList.add("f-active");
-          setTimeout(()=>render(todoList), 300);
-          
+          setTimeout(() => render(todoList), 300);
+
           break;
         case 'active-todo':
           ele.classList.add("f-active");
-          setTimeout(()=>getActive(todoList), 300);
-          
+          setTimeout(() => getActive(todoList), 300);
+
           break;
-        
+
         case 'completed-todo':
           ele.classList.add("f-active");
-          setTimeout(()=>getCompleted(todoList), 300);
+          setTimeout(() => getCompleted(todoList), 300);
           break;
         default:
           break;
