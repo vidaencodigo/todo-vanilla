@@ -171,7 +171,17 @@
       
     }
 
-    
+    .filtro {
+      display: flex;
+      flex-wrap: wrap;
+      gap:8px;
+    }
+    .f-active {
+      color: blue!important;
+    }
+    .filtro a:hover  {
+      color: blue;
+    }
     #todos {
       overflow-x: auto;
       scroll-behavior: smooth;
@@ -204,7 +214,7 @@
       align-items: center;
       gap: 8px;
       padding: 15px 10px;
-      border-bottom: 1px solid #f2f2f2;
+      border-bottom: 1px solid hsl(234, 11%, 52%);
     }
 
     .check {
@@ -357,8 +367,19 @@
             <div>
               <span id="counter">0</span> items left
             </div>
+            <div class="filtro">
+              <a class="actions primero filtros f-active" href="#" data-action="all-todo" onclick="setNav(this)">
+                All
+              </a>
+              <a class="actions filtros" href="#" data-action="active-todo" onclick="setNav(this)">
+                Active
+              </a>
+              <a class="actions filtros" href="#" data-action="completed-todo" onclick="setNav(this)">
+                Completed
+              </a>
+            </div>
             <div>
-              <a class="actions" href="#">
+              <a class="actions" href="#" onclick="deleteCompleted()">
                 Clear Completed
               </a>
             </div>
@@ -383,7 +404,34 @@
 
       })
     })
-
+    function deleteCompleted(){
+      deleteAllComplpeted(todoList);
+    }
+    function setNav(elemento){
+      let ele = elemento;
+      document.querySelectorAll('.filtros').forEach(ele=>{
+            ele.classList.remove("f-active");
+          })
+      switch (ele.dataset.action) {
+        case 'all-todo':
+          ele.classList.add("f-active");
+          setTimeout(()=>render(todoList), 300);
+          
+          break;
+        case 'active-todo':
+          ele.classList.add("f-active");
+          setTimeout(()=>getActive(todoList), 300);
+          
+          break;
+        
+        case 'completed-todo':
+          ele.classList.add("f-active");
+          setTimeout(()=>getCompleted(todoList), 300);
+          break;
+        default:
+          break;
+      }
+    }
 
     function changeTheme() {
       const content = document.querySelector(".app");

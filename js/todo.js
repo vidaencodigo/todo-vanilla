@@ -1,4 +1,4 @@
-const todoList = [];
+let todoList = [];
 const itemTemplate = {
     id: 0,
     body: "",
@@ -57,9 +57,10 @@ function findNote(id, collection) {
 function closeNote(id, collection) {
 
     // Cierra la nota por @id nota
-    let temporal_note = {}
-    let indice = undefined;
+
     try {
+        let temporal_note;
+        let indice = undefined;
         // busca nota y la almacena en variable
         temporal_note = findNote(id, collection);
         if (temporal_note) {
@@ -93,6 +94,24 @@ function DeleteItem(id, collection) {
     }
 }
 
+function deleteAllComplpeted(collection) {
+
+
+    setTimeout(() => {
+        document.querySelectorAll('.filtros').forEach(ele => {
+            ele.classList.remove("f-active");
+        })
+        document.querySelector(".primero").classList.add("f-active");
+        todoList = collection.filter(item => {
+            if (item.isActive) {
+                return item
+            }
+        }, [])
+        render(todoList);
+    }, 400);
+
+}
+
 
 function checker(id) {
     /**
@@ -100,6 +119,10 @@ function checker(id) {
      */
     let ide = id.id;
     closeNote(ide, todoList);
+    document.querySelectorAll('.filtros').forEach(ele => {
+        ele.classList.remove("f-active");
+    })
+    document.querySelector(".primero").classList.add("f-active");
     render(todoList)
 }
 
@@ -112,6 +135,25 @@ function deleteTodo(id) {
 
 }
 
+function getActive(collection) {
+    let active = [...collection.map(item => {
+        if (item.isActive) {
+            return item;
+        }
+    })];
+
+    render(active);
+}
+
+function getCompleted(collection) {
+    let active = [...collection.map(item => {
+        if (!item.isActive) {
+            return item;
+        }
+    })];
+
+    render(active);
+}
 
 function render(collection) {
     totalTodo(true, todoList);
@@ -120,8 +162,8 @@ function render(collection) {
     let data = collection
     const content = document.querySelector("#todos")
     content.innerHTML = data.map(item => {
-
-        return (`<div class="todo--item">
+        if (item) {
+            return (`<div class="todo--item">
             <div class="icon">
               <label>
                 <input type="checkbox" class="check">
@@ -140,6 +182,7 @@ function render(collection) {
               </a>
             </div>
           </div>`)
+        }
 
 
 
