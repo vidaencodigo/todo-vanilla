@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+:root {
+    -Very-Dark-Blue: hsl(235, 21%, 11%);
+    -Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+    -Light-Grayish-Blue: hsl(234, 39%, 85%);
+    -Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+    -Dark-Grayish-Blue: hsl(234, 11%, 52%);
+    -Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
+    -Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+
+
+    /*light*/
+    -Very-Light-Gray: hsl(0, 0%, 98%);
+    -Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+    -L-Light-Grayish-Blue: hsl(233, 11%, 84%);
+    -L-Dark-Grayish-Blue: hsl(236, 9%, 61%);
+    -L-Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+}
+
+.light {
+    /* global colors */
+    background-color: hsl(233, 11%, 84%);
+    color: hsl(235, 19%, 35%);
+}
+
+.dark {
+    background-color: hsl(235, 21%, 11%) !important;
+    color: hsl(236, 33%, 92%);
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    font-weight: 500;
+    color: hsl(236, 9%, 61%);
+    ;
+}
+
+.app {
+    background-color: hsl(233, 11%, 84%);
+    width: 100%;
+    height: 100vh;
+    font-size: 18px;
+    transition: all .7s;
+
+
+
+}
+
+.header--app {
+    background: url('../images/bg-desktop-light.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    padding: 30px 20px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.title,
+.todo--content {
+    width: 50%;
+
+    align-self: center;
+}
+
+h1 {
+    color: hsl(0, 0%, 98%);
+    transition: all .7s;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+}
+
+
+.icon--theme {
+    display: block;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background: url("../images/icon-moon.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    user-select: none;
+    transition: all .7s;
+}
+
+
+.input--group {
+    width: 100%;
+    background-color: hsl(0, 0%, 98%);
+    padding: 0 10px;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: all .7s;
+}
+
+.round--icon {
+    width: 22px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid hsl(233, 11%, 84%);
+    transition: all .7s;
+}
+
+.input {
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    border-radius: 8px;
+    padding: 15px 0;
+    color: hsl(235, 19%, 35%);
+    transition: all .7;
+}
+
+.todo--content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    gap: 20px;
+}
+
+.todo--list {
+    width: 100%;
+    height: auto;
+    background-color: hsl(0, 0%, 98%);
+    border-radius: 8px;
+    transition: all .7s;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+
+    max-height: 300px;
+
+}
+
+.filtro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.f-active {
+    color: #0d6efd !important;
+}
+
+.filtro a:hover {
+    color: #0d6efd;
+}
+
+#todos {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+#todos::-webkit-scrollbar {
+    display: initial;
+}
+
+h1 {
+    letter-spacing: .7em;
+    font-weight: 700;
+}
+
+
+
+.todo--actions {
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions {
+    color: hsl(236, 9%, 61%);
+}
+
+.todo--item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 10px;
+    border-bottom: 1px solid hsl(234, 11%, 52%);
+}
+
+.check {
+
+    display: none;
+}
+
+.round--icon {
+    cursor: pointer;
+    user-select: none;
+}
+
+.check:checked~.round--icon {
+    user-select: none;
+    background-color: #9b5fe5;
+    background-image: linear-gradient(to right, #70c4fa, #9b5fe5);
+    transition: all .7 ease;
+
+}
+
+.lineT {
+    text-decoration: line-through;
+}
+
+.check:checked~.item>svg {
+    display: block;
+    transition: all .7;
+}
+
+.active {
+    /*fondo gradiente para checkbox*/
+    background-color: #9b5fe5;
+    background-image: linear-gradient(to right, #70c4fa, #9b5fe5);
+
+}
+
+
+.item {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.item>svg {
+    display: none;
+}
+
+.item--content {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.item--content p {
+    overflow: hidden;
+}
+
+.close--cross {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.item--content:hover .close--cross>img {
+    display: block;
+    transition: all .7;
+
+}
+
+.close--cross>img {
+    display: none;
+}
+
+/*dark*/
+
+.dark .icon--theme {
+    background: url("../images/icon-sun.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: all .7s;
+}
+
+.dark .header--app {
+    background: url('../images/bg-desktop-dark.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all .7s;
+}
+
+.dark .input--group {
+    background-color: hsl(235, 24%, 19%);
+    transition: all .7s;
+}
+
+.dark .input {
+    color: hsl(236, 33%, 92%);
+
+    transition: all .7s;
+}
+
+.dark .todo--list {
+    background-color: hsl(235, 24%, 19%);
+    transition: all .7s;
+}
+
+.enlinea {
+    display: block;
+}
+
+.fueralinea {
+    display: none;
+}
+
+.dark .fueralinea {
+    background-color: hsl(235, 24%, 19%);
+    transition: all .7s;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .close--cross>img {
+        display: block;
+    }
+
+    .fueralinea {
+        display: block;
+    }
+
+    .fueralinea {
+
+        background-color: hsl(0, 0%, 98%);
+        padding: 15px 10px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+    }
+
+    body,
+    input {
+        font-size: 1.2rem;
+    }
+
+    .title,
+    .todo--content {
+        width: 100%;
+    }
+
+    .enlinea {
+        display: none;
+    }
+}
