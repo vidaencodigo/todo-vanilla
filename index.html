@@ -336,7 +336,8 @@
     .enlinea {
       display: block;
     }
-    .fueralinea{
+
+    .fueralinea {
       display: none;
     }
 
@@ -345,22 +346,28 @@
       transition: all .7s;
     }
 
-    
+
 
     @media screen and (max-width: 600px) {
-      .fueralinea{
+      .close--cross>img {
         display: block;
       }
+
       .fueralinea {
-      
-      background-color: hsl(0, 0%, 98%);
-      padding: 15px 10px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-    }
+        display: block;
+      }
+
+      .fueralinea {
+
+        background-color: hsl(0, 0%, 98%);
+        padding: 15px 10px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+      }
+
       body,
       input {
         font-size: 1.2rem;
