@@ -41,12 +41,12 @@ function AddNoteToStack(collection, item) {
 
 };
 
-function totalTodo(status = true, collection){
+function totalTodo(status = true, collection) {
     let count = collection.map(item => item.isActive == status);
-    let total  = count.filter(function( element ) {
-        if(element) return element
-     }).length;
-     document.querySelector("#counter").innerHTML=total;
+    let total = count.filter(function (element) {
+        if (element) return element
+    }).length;
+    document.querySelector("#counter").innerHTML = total;
 }
 function findNote(id, collection) {
     // Busca una nota por @id y la retorna
@@ -55,7 +55,7 @@ function findNote(id, collection) {
 };
 
 function closeNote(id, collection) {
-    
+
     // Cierra la nota por @id nota
     let temporal_note = {}
     let indice = undefined;
@@ -69,54 +69,80 @@ function closeNote(id, collection) {
             indice = collection.findIndex((nota) => nota.id === id);
             // se actualiza la nota al stack
             collection[indice] = temporal_note;
-           
-        } else {
-            console.log("error de nota")
+
         }
     } catch (error) {
         console.error("error");
     }
 }
 
+function DeleteItem(id, collection) {
+    // Elimina la nota por @id nota
+    let temporal_note = {}
+    let indice = undefined;
+    try {
+        // busca nota y la almacena en variable
+        temporal_note = findNote(id, collection);
+        if (temporal_note) {
+            indice = collection.findIndex((nota) => nota.id === id);
+            // se elimina la nota al stack
+            collection.splice(indice, 1);
+        }
+    } catch (error) {
+        console.error("error, mas detalles:\n" + error);
+    }
+}
 
-function checker(id){
+
+function checker(id) {
+    /**
+     * Funcion invocada por cada checkbox
+     */
     let ide = id.id;
     closeNote(ide, todoList);
     render(todoList)
-  }
+}
 
+function deleteTodo(id) {
+    // elimina todo del stack 
+    setTimeout(() => {
+        DeleteItem(id.id, todoList);
+        render(todoList);
+    }, 300);
+
+}
 
 
 function render(collection) {
-   totalTodo(true, todoList);
-  
-   
+    totalTodo(true, todoList);
+
+
     let data = collection
     const content = document.querySelector("#todos")
     content.innerHTML = data.map(item => {
-        
-            return  (`<div class="todo--item">
+
+        return (`<div class="todo--item">
             <div class="icon">
               <label>
                 <input type="checkbox" class="check">
-                <div class="round--icon item ${item.isActive ? '':'active'}"  onclick="checker(this)" id="${item.id}">
-                  <svg style="display:${item.isActive ? 'none':'block'};"  xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+                <div class="round--icon item ${item.isActive ? '' : 'active'}"  onclick="checker(this)" id="${item.id}">
+                  <svg style="display:${item.isActive ? 'none' : 'block'};"  xmlns="http://www.w3.org/2000/svg" width="11" height="9">
                     <path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6" />
                   </svg>
                 </div>
               </label>
           
             </div>
-            <div class="item--content" onclick="checker(this)" id="${item.id}">
-              <p class="${item.isActive ? '':'lineT'}">${item.body}</p>
-              <a href="#" class="close--cross">
-                <img src="./images/icon-cross.svg" alt="close">
+            <div class="item--content">
+              <p style="width:100%; padding:4px;" class="${item.isActive ? '' : 'lineT'}"  onclick="checker(this)" id="${item.id}">${item.body}</p>
+              <a href="#" class="close--cross" >
+                <img src="./images/icon-cross.svg" alt="close" onclick="deleteTodo(this)" id="${item.id}">
               </a>
             </div>
           </div>`)
 
-        
-        
+
+
     }).join('')
 
 

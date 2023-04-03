@@ -165,7 +165,20 @@
       transition: all .7s;
       display: flex;
       flex-direction: column;
-      padding: 15px 0;
+      padding: 0;
+      
+      max-height: 300px;
+      
+    }
+
+    
+    #todos {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    #todos::-webkit-scrollbar {
+      display: initial;
     }
 
     h1 {
@@ -258,11 +271,11 @@
     .close--cross {
       width: 30px;
       height: 30px;
-    
+
       display: flex;
       align-items: center;
       justify-content: center;
-     
+
     }
 
     .item--content:hover .close--cross>img {
@@ -276,6 +289,7 @@
     }
 
     /*dark*/
+    
     .dark .icon--theme {
       background: url("images/icon-sun.svg");
       background-repeat: no-repeat;
